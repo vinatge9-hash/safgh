@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Your Cart - Niyantri Dog Care</title>
+  <script src='https://cdn.tailwindcss.com'></script>
+</head>
+<body class='bg-gray-50 text-gray-800'>
+  <!-- Header -->
+  <header class='fixed w-full z-50 backdrop-filter backdrop-blur-lg bg-white/60 border-b border-gray-200'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6'>
+      <div class='flex items-center justify-between h-16'>
+        <a href='index.html' class='flex items-center space-x-2'>
+          <svg width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='text-orange-500'>
+            <path d='M4 4h4l2 2h6l2-2h4v4l-2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8L2 6V4h2z'/>
+          </svg>
+          <span class='font-semibold text-xl'>Niyantri Dog Care</span>
+        </a>
+        <nav class='hidden md:flex items-center gap-6'>
+          <a href='index.html' class='hover:text-orange-600'>Home</a>
+          <a href='services.html' class='hover:text-orange-600'>Services</a>
+          <a href='about.html' class='hover:text-orange-600'>About</a>
+          <a href='contact.html' class='hover:text-orange-600'>Contact</a>
+          <a href='cart.html' class='flex items-center gap-1'>
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path d='M3 3h2l.4 2M7 13h10l3-8H6.4' stroke-width='2'/>
+            </svg>
+            <span>Cart (<span id='cart-count'>0</span>)</span>
+          </a>
+          <a href='checkout.html' class='ml-2 bg-orange-500 text-white px-4 py-2 rounded-md'>Checkout</a>
+        </nav>
+        <button class='md:hidden p-2 rounded-md text-gray-700' id='mobile-menu-button' aria-label='Open menu'>
+          <svg width='24' height='24' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main class='container mx-auto px-6 pt-28'>
+    <section class='bg-white p-6 rounded-lg shadow'>
+      <h2 class='text-2xl font-semibold mb-4'>Your Cart</h2>
+      <div id='cart-items-container'></div>
+      <div class='mt-4 flex items-center justify-between'>
+        <span class='font-semibold'>Total: ₹<span id='cart-total'>0.00</span></span>
+        <button class='bg-green-500 text-white px-4 py-2 rounded-md' onclick='proceedToCheckout()'>Proceed to Checkout</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class='bg-gray-800 text-white mt-12'>
+    <div class='container mx-auto px-6 py-6 flex items-center justify-between'>
+      <p class='text-sm'>&copy; 2025 Niyantri Dog Care. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { updateCartCount(); const btn = document.getElementById('mobile-menu-button'); const panel = document.getElementById('mobile-menu'); if (btn && panel) btn.addEventListener('click', () => panel.classList.toggle('hidden')); renderCartPage(); });
+    function getCart(){ return JSON.parse(localStorage.getItem('shoppingCart')) || []; }
+    function saveCart(cart){ localStorage.setItem('shoppingCart', JSON.stringify(cart)); updateCartCount(); renderCartPage(); }
+    function renderCartPage(){ const cart = getCart(); const container = document.getElementById('cart-items-container'); const totalEl = document.getElementById('cart-total'); if (!container || !totalEl) return; container.innerHTML = ''; if (cart.length === 0){ container.innerHTML = '<p>Your cart is empty.</p>'; totalEl.textContent = '0.00'; return; } let total = 0; cart.forEach(item => { const row = document.createElement('div'); row.className = 'flex items-center justify-between py-2 border-b'; row.innerHTML = `<span>${item.name} (x${item.quantity})</span><div class='flex items-center gap-2'><span>$${(item.price * item.quantity).toFixed(2)}</span><button onclick="removeFromCart('${item.id}')" class='text-red-500 hover:text-red-700'>Remove</button></div>`; container.appendChild(row); total += item.price * item.quantity; }); totalEl.textContent = total.toFixed(2); }
+    function updateCartCount(){ const cart = getCart(); const total = cart.reduce((s,i)=> s + i.quantity, 0); const el = document.getElementById('cart-count'); if (el) el.textContent = total; }
+    function removeFromCart(id){ let cart = getCart(); cart = cart.filter(i => i.id !== id); saveCart(cart); }
+    function proceedToCheckout(){ const cart = getCart(); if (cart.length > 0) { window.location.href = './checkout.html'; } else { alert('Your cart is empty.'); } }
+  </script>
+</body>
+</html>
