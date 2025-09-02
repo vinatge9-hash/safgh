@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>About - Niyantri Dog Care</title>
+  <script src='https://cdn.tailwindcss.com'></script>
+  <style>.page-fade{opacity:0; transition:opacity 700ms ease-in-out;} .page-fade.visible{opacity:1;}</style>
+</head>
+<body class='bg-gray-50 text-gray-800'>
+  <!-- Header (identical) -->
+  <header class='fixed w-full z-50 backdrop-filter backdrop-blur-lg bg-white/60 border-b border-gray-200'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6'>
+      <div class='flex items-center justify-between h-16'>
+        <a href='index.html' class='flex items-center space-x-2'>
+          <svg width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='text-orange-500'>
+            <path d='M4 4h4l2 2h6l2-2h4v4l-2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8L2 6V4h2z'/>
+          </svg>
+          <span class='font-semibold text-xl'>Niyantri Dog Care</span>
+        </a>
+        <nav class='hidden md:flex items-center gap-6'>
+          <a href='index.html' class='hover:text-orange-600'>Home</a>
+          <a href='services.html' class='hover:text-orange-600'>Services</a>
+          <a href='about.html' class='hover:text-orange-600'>About</a>
+          <a href='contact.html' class='hover:text-orange-600'>Contact</a>
+          <a href='cart.html' class='flex items-center gap-1'>
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path d='M3 3h2l.4 2M7 13h10l3-8H6.4' stroke-width='2'/>
+            </svg>
+            <span>Cart (<span id='cart-count'>0</span>)</span>
+          </a>
+          <a href='contact.html' class='ml-2 bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600'>Book Now</a>
+        </nav>
+        <button class='md:hidden p-2 rounded-md text-gray-700' id='mobile-menu-button' aria-label='Open menu'>
+          <svg width='24' height='24' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id='mobile-menu' class='hidden md:hidden bg-white border-t border-gray-200'>
+      <a href='index.html' class='block px-4 py-2'>Home</a>
+      <a href='services.html' class='block px-4 py-2'>Services</a>
+      <a href='about.html' class='block px-4 py-2'>About</a>
+      <a href='contact.html' class='block px-4 py-2'>Contact</a>
+      <a href='cart.html' class='block px-4 py-2'>Cart (<span id='mobile-cart-count'>0</span>)</a>
+    </div>
+  </header>
+
+  <main id='page-content' class='page-fade container mx-auto px-6 pt-20'>
+    <section class='py-16'>
+      <h1 class='text-3xl font-bold mb-4' style='font-family: Playfair Display, serif;'>Our Story</h1>
+      <p class='text-lg'>Niyantri Dog Care started in Hyderabad with a vision to provide premium, trustworthy grooming for dogs. We combine veterinary-approved practices with spa-like experiences to help every dog feel relaxed and cherished.</p>
+    </section>
+
+    <section class='py-8'>
+      <h2 class='text-2xl font-semibold mb-4'>Our Values</h2>
+      <ul class='list-disc pl-6 space-y-2'>
+        <li>Compassion for every dog</li>
+        <li>Transparency with clients</li>
+        <li>Professional, trained staff</li>
+        <li>Safe and clean environment</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class='bg-gray-800 text-white'>
+    <div class='container mx-auto px-6 py-6 flex items-center justify-between'>
+      <p class='text-sm'>&copy; 2025 Niyantri Dog Care. All rights reserved.</p>
+      <div class='flex items-center gap-3'>
+        <a href='https://instagram.com' aria-label='Instagram' class='inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 hover:bg-white/40'>
+          <svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' class='text-white'>
+            <path d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z'/>
+          </svg>
+        </a>
+        <a href='mailto:hello@niyantridogcare.com' class='text-white hover:text-orange-300'>hello@niyantridogcare.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      const mainContent = document.getElementById('page-content');
+      if (mainContent) mainContent.classList.add('visible');
+      const btn = document.getElementById('mobile-menu-button');
+      const panel = document.getElementById('mobile-menu');
+      if (btn && panel) btn.addEventListener('click', () => panel.classList.toggle('hidden'));
+    });
+    function getCart(){ return JSON.parse(localStorage.getItem('shoppingCart')) || []; }
+    function saveCart(cart){ localStorage.setItem('shoppingCart', JSON.stringify(cart)); updateCartCount(); }
+    function addToCart(id, name, price){ const cart = getCart(); const existing = cart.find(i => i.id === id); if (existing) existing.quantity++; else cart.push({id, name, price, quantity:1}); saveCart(cart); alert(name + ' added to cart.'); }
+    function removeFromCart(id){ let cart = getCart(); cart = cart.filter(i => i.id !== id); saveCart(cart); if (document.getElementById('cart-items-container')) renderCartPage(); }
+    function updateCartCount(){ const cart = getCart(); const total = cart.reduce((s,i)=> s + i.quantity, 0); const el = document.getElementById('cart-count'); if (el) el.textContent = total; const mEl = document.getElementById('mobile-cart-count'); if (mEl) mEl.textContent = total; }
+    function renderCartPage(){ const cart = getCart(); const c = document.getElementById('cart-items-container'); const t = document.getElementById('cart-total'); if (!c || !t) return; c.innerHTML = ''; if (cart.length === 0){ c.innerHTML = '<p>Your cart is empty.</p>'; t.textContent = '0.00'; return; } let total = 0; cart.forEach(it => { const row = document.createElement('div'); row.className='flex items-center justify-between py-2 border-b'; row.innerHTML = `<span>${it.name} (x${it.quantity})</span><div class='flex items-center gap-2'><span>$${(it.price * it.quantity).toFixed(2)}</span><button onclick="removeFromCart('${it.id}')" class='text-red-500 hover:text-red-700'>Remove</button></div>`; c.appendChild(row); total += it.price * it.quantity; }); t.textContent = total.toFixed(2); }
+    function proceedToCheckout(){ if (getCart().length > 0) window.location.href = './checkout.html'; else alert('Your cart is empty.'); }
+  </script>
+</body>
+</html>
