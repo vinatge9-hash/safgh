@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Niyantri Dog Care | Premium Dog Grooming</title>
+  <script src='https://cdn.tailwindcss.com'></script>
+  <style>
+    /* gentle page fade-in on load */
+    .page-fade { opacity: 0; transition: opacity 700ms ease-in-out; }
+    .page-fade.visible { opacity: 1; }
+  </style>
+</head>
+<body class='bg-gray-50 text-gray-800'>
+  <!-- Header / Nav (identical across pages) -->
+  <header class='fixed w-full z-50 backdrop-filter backdrop-blur-lg bg-white/60 border-b border-gray-200'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6'>
+      <div class='flex items-center justify-between h-16'>
+        <a href='index.html' class='flex items-center space-x-2'>
+          <!-- logo with inline SVG paw -->
+          <svg width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='text-orange-500'>
+            <path d='M4 4h4l2 2h6l2-2h4v4l-2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8L2 6V4h2z'/>
+          </svg>
+          <span class='font-semibold text-xl'>Niyantri Dog Care</span>
+        </a>
+        <nav class='hidden md:flex items-center gap-6'>
+          <a href='index.html' class='hover:text-orange-600'>Home</a>
+          <a href='services.html' class='hover:text-orange-600'>Services</a>
+          <a href='about.html' class='hover:text-orange-600'>About</a>
+          <a href='contact.html' class='hover:text-orange-600'>Contact</a>
+          <a href='cart.html' class='flex items-center gap-1'>
+            <!-- cart icon -->
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path d='M3 3h2l.4 2M7 13h10l3-8H6.4' stroke-width='2'/>
+            </svg>
+            <span>Cart (<span id='cart-count'>0</span>)</span>
+          </a>
+          <a href='contact.html' class='ml-2 bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600'>Book Now</a>
+        </nav>
+        <button class='md:hidden p-2 rounded-md text-gray-700' id='mobile-menu-button' aria-label='Open menu'>
+          <svg width='24' height='24' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id='mobile-menu' class='hidden md:hidden bg-white border-t border-gray-200'>
+      <a href='index.html' class='block px-4 py-2'>Home</a>
+      <a href='services.html' class='block px-4 py-2'>Services</a>
+      <a href='about.html' class='block px-4 py-2'>About</a>
+      <a href='contact.html' class='block px-4 py-2'>Contact</a>
+      <a href='cart.html' class='block px-4 py-2'>Cart (<span id='mobile-cart-count'>0</span>)</a>
+    </div>
+  </header>
+
+  <main id='page-content' class='page-fade container mx-auto px-6 pt-20'>
+    <!-- HERO -->
+    <section class='relative w-full h-screen overflow-hidden'>
+      <img src="https://images.unsplash.com/photo-1723627616172-a5dcf8498190?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwxMHx8YSUyMGhpZ2gtcXVhbGl0eSUyMGJhY2tncm91bmQlMjBpbWFnZSUyMG9mJTIwYSUyMGhhcHB5JTIwZ29sZGVuJTIwcmV0cmlldmVyfGVufDB8MHx8fDE3NTY4MTM2MjF8MA&ixlib=rb-4.1.0&q=80&w=1080" alt='Happy golden retriever' class='absolute inset-0 w-full h-full object-cover'>
+      <div class='absolute inset-0 bg-black/40'></div>
+      <div class='relative z-10 h-full flex items-center'>
+        <div class='w-full lg:w-1/2 text-white pl-6 pr-6'>
+          <h1 class='text-4xl md:text-6xl font-bold' style='font-family: Inter, sans-serif;'>Your Dog Deserves the Best <span style='color:#F97316;'>Care</span></h1>
+          <p class='mt-4 text-lg' style='font-family: Inter, sans-serif; max-width: 40rem;'>We provide professional grooming and spa treatments tailored to your dog’s needs. From a soothing bath to a luxurious spa experience, your furry friend will leave looking and feeling fabulous.</p>
+        </div>
+        <div class='hidden lg:block w-1/2 relative'>
+          <img src="https://images.unsplash.com/photo-1593895647995-efb19cf3c868?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw2fHxhJTIwZGV0YWlsZWQlMjBkZXNjcmlwdGlvbiUyMG9mJTIwYSUyMGRvZyUyMGJlaW5nJTIwZ3Jvb21lZHxlbnwwfDB8fHwxNzU2ODEzNjIxfDA&ixlib=rb-4.1.0&q=80&w=1080" alt='Dog being groomed' class='absolute right-0 bottom-0 w-3/5 rounded-xl shadow-xl border-4 border-white' style='transform: translateY(40px);'>
+        </div>
+      </div>
+      <!-- social proof bar -->
+      <div class='absolute bottom-0 left-0 right-0 bg-white/95 text-gray-800 py-4'>
+        <div class='container mx-auto px-6 flex items-center justify-between gap-6'>
+          <div class='flex items-center gap-2'>
+            <svg aria-hidden='true' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='text-yellow-500'>
+              <path d='M12 2l3 6 7 1-5 4 2 7-7-3-7 3 2-7-5-4 7-1 3-6z'/>
+            </svg>
+            <span>500+ Happy Dogs</span>
+          </div>
+          <div class='flex items-center gap-2'>
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path d='M12 2l3 6 7 1-5 4 2 7-7-3-7 3 2-7-5-4 7-1 3-6z'/>
+            </svg>
+            <span>5 Years Experience</span>
+          </div>
+          <div class='flex items-center gap-2'>
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path d='M12 2l3 6 7 1-5 4 2 7-7-3-7 3 2-7-5-4 7-1 3-6z'/>
+            </svg>
+            <span>4.9 Rating</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTES / TESTIMONIALS -->
+    <section class='py-16'>
+      <h2 class='text-3xl font-semibold mb-6' style='font-family: Playfair Display, serif;'>What clients say</h2>
+      <div class='grid grid-cols-1 md:grid-cols-3 gap-6'>
+        <blockquote class='p-6 rounded-xl bg-white shadow'>
+          <p>“Niyantri treats our pup like family. She comes home happy and clean every time.”</p>
+          <footer class='mt-2'>— Priya</footer>
+        </blockquote>
+        <blockquote class='p-6 rounded-xl bg-white shadow'>
+          <p>“Professional, friendly, and meticulous. Highly recommended.”</p>
+          <footer class='mt-2'>— Ravi</footer>
+        </blockquote>
+        <blockquote class='p-6 rounded-xl bg-white shadow'>
+          <p>“Beautiful spa experience for my dog. The team really cares.”</p>
+          <footer class='mt-2'>— Aisha</footer>
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <footer class='bg-gray-800 text-white'>
+    <div class='container mx-auto px-6 py-6 flex items-center justify-between'>
+      <p class='text-sm'>&copy; 2025 Niyantri Dog Care. All rights reserved.</p>
+      <div class='flex items-center gap-3'>
+        <a href='https://instagram.com' aria-label='Instagram' class='inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 hover:bg-white/40'>
+          <svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' class='text-white'>
+            <path d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z'/>
+          </svg>
+        </a>
+        <a href='mailto:hello@niyantridogcare.com' class='text-white hover:text-orange-300'>hello@niyantridogcare.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- shared cart script (one block on all pages) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartCount();
+      // show page after load to trigger fade-in
+      document.getElementById('page-content')?.classList.add('visible');
+      // mobile menu toggle
+      const btn = document.getElementById('mobile-menu-button');
+      const panel = document.getElementById('mobile-menu');
+      if (btn && panel) {
+        btn.addEventListener('click', () => panel.classList.toggle('hidden'));
+      }
+    });
+    function getCart() { return JSON.parse(localStorage.getItem('shoppingCart')) || []; }
+    function saveCart(cart) { localStorage.setItem('shoppingCart', JSON.stringify(cart)); updateCartCount(); }
+    function addToCart(itemId, itemName, itemPrice) {
+      const cart = getCart();
+      const existing = cart.find(i => i.id === itemId);
+      if (existing) existing.quantity++; else cart.push({ id: itemId, name: itemName, price: itemPrice, quantity: 1 });
+      saveCart(cart);
+      alert(itemName + ' has been added to your cart.');
+    }
+    function removeFromCart(itemId) {
+      let cart = getCart();
+      cart = cart.filter(i => i.id !== itemId);
+      saveCart(cart);
+      if (document.getElementById('cart-items-container')) renderCartPage();
+    }
+    function updateCartCount() {
+      const cart = getCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const el = document.getElementById('cart-count');
+      if (el) el.textContent = totalItems;
+      const mobileEl = document.getElementById('mobile-cart-count');
+      if (mobileEl) mobileEl.textContent = totalItems;
+    }
+    function renderCartPage() {
+      const cart = getCart();
+      const container = document.getElementById('cart-items-container');
+      const totalEl = document.getElementById('cart-total');
+      if (!container || !totalEl) return;
+      container.innerHTML = '';
+      if (cart.length === 0) { container.innerHTML = '<p>Your cart is empty.</p>'; totalEl.textContent = '0.00'; return; }
+      let total = 0;
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center justify-between py-2 border-b';
+        row.innerHTML = `<span>${item.name} (x${item.quantity})</span><div class='flex items-center gap-2'><span>$${(item.price * item.quantity).toFixed(2)}</span><button onclick="removeFromCart('${item.id}')" class='text-red-500 hover:text-red-700'>Remove</button></div>`;
+        container.appendChild(row);
+        total += item.price * item.quantity;
+      });
+      totalEl.textContent = total.toFixed(2);
+    }
+    function proceedToCheckout() {
+      if (getCart().length > 0) { window.location.href = './checkout.html'; } else { alert('Your cart is empty.'); }
+    }
+  </script>
+</body>
+</html>
