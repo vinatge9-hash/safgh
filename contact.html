@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Contact - Niyantri Dog Care</title>
+  <script src='https://cdn.tailwindcss.com'></script>
+</head>
+<body class='bg-gray-50 text-gray-800'>
+  <!-- Header -->
+  <header class='fixed w-full z-50 backdrop-filter backdrop-blur-lg bg-white/60 border-b border-gray-200'>
+    <div class='max-w-7xl mx-auto px-4 sm:px-6'>
+      <div class='flex items-center justify-between h-16'>
+        <a href='index.html' class='flex items-center space-x-2'>
+          <svg width='28' height='28' viewBox='0 0 24 24' fill='none' stroke='currentColor' class='text-orange-500'>
+            <path d='M4 4h4l2 2h6l2-2h4v4l-2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8L2 6V4h2z'/>
+          </svg>
+          <span class='font-semibold text-xl'>Niyantri Dog Care</span>
+        </a>
+        <nav class='hidden md:flex items-center gap-6'>
+          <a href='index.html' class='hover:text-orange-600'>Home</a>
+          <a href='services.html' class='hover:text-orange-600'>Services</a>
+          <a href='about.html' class='hover:text-orange-600'>About</a>
+          <a href='contact.html' class='hover:text-orange-600'>Contact</a>
+          <a href='cart.html' class='flex items-center gap-1'>
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path d='M3 3h2l.4 2M7 13h10l3-8H6.4' stroke-width='2'/>
+            </svg>
+            <span>Cart (<span id='cart-count'>0</span>)</span>
+          </a>
+          <a href='contact.html' class='ml-2 bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600'>Book Now</a>
+        </nav>
+        <button class='md:hidden p-2 rounded-md text-gray-700' id='mobile-menu-button' aria-label='Open menu'>
+          <svg width='24' height='24' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id='mobile-menu' class='hidden md:hidden bg-white border-t border-gray-200'>
+      <a href='index.html' class='block px-4 py-2'>Home</a>
+      <a href='services.html' class='block px-4 py-2'>Services</a>
+      <a href='about.html' class='block px-4 py-2'>About</a>
+      <a href='contact.html' class='block px-4 py-2'>Contact</a>
+      <a href='cart.html' class='block px-4 py-2'>Cart (<span id='mobile-cart-count'>0</span>)</a>
+    </div>
+  </header>
+
+  <main class='container mx-auto px-6 pt-24'>
+    <section class='bg-white p-6 rounded-lg shadow'>
+      <h1 class='text-2xl font-semibold mb-2'>Get in touch</h1>
+      <p>We’d love to hear from you. Reach out for questions, booking, or to share your dog’s needs. Our clinic is located in Hyderabad, India.</p>
+      <div class='mt-4'>
+        <p class='font-semibold mb-2'>Address</p>
+        <p>Hyderabad, India (Placeholder address for bookings)</p>
+        <p class='mt-2 font-semibold mb-2'>Phone</p>
+        <p>+91 98765 43210</p>
+      </div>
+    </section>
+
+    <section class='mt-8'>
+      <form class='bg-white p-6 rounded-lg shadow'>
+        <div class='grid grid-cols-1 md:grid-cols-2 gap-4'>
+          <input class='border rounded p-2' placeholder='Your name' />
+          <input class='border rounded p-2' placeholder='Email' type='email' />
+        </div>
+        <textarea class='w-full mt-4 border rounded p-2' rows='4' placeholder='Your message'></textarea>
+        <button type='submit' class='mt-4 bg-orange-500 text-white px-4 py-2 rounded-md'>Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class='bg-gray-800 text-white'>
+    <div class='container mx-auto px-6 py-6 flex items-center justify-between'>
+      <p class='text-sm'>&copy; 2025 Niyantri Dog Care. All rights reserved.</p>
+      <div class='flex items-center gap-3'>
+        <a href='https://instagram.com' aria-label='Instagram' class='inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/20 hover:bg-white/40'>
+          <svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor' class='text-white'>
+            <path d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7z'/>
+          </svg>
+        </a>
+        <a href='mailto:hello@niyantridogcare.com' class='text-white hover:text-orange-300'>hello@niyantridogcare.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => { updateCartCount(); const btn = document.getElementById('mobile-menu-button'); const panel = document.getElementById('mobile-menu'); if (btn && panel) btn.addEventListener('click', () => panel.classList.toggle('hidden')); });
+    function getCart(){ return JSON.parse(localStorage.getItem('shoppingCart')) || []; }
+    function saveCart(cart){ localStorage.setItem('shoppingCart', JSON.stringify(cart)); updateCartCount(); }
+    function updateCartCount(){ const cart = getCart(); const total = cart.reduce((s,i)=> s + i.quantity, 0); const el = document.getElementById('cart-count'); if (el) el.textContent = total; const mec = document.getElementById('mobile-cart-count'); if (mec) mec.textContent = total; }
+  </script>
+</body>
+</html>
